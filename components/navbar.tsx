@@ -15,6 +15,7 @@ const navLinks = [
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const updateActiveSection = () => {
@@ -41,7 +42,6 @@ export default function Navbar() {
       passive: true,
     });
 
-    // Initial check is deferred to the next animation frame.
     const frame = requestAnimationFrame(updateActiveSection);
 
     return () => {
@@ -52,12 +52,32 @@ export default function Navbar() {
 
   return (
     <header className="site-header">
-      <div className="navbar">
+
+      <div className={`navbar ${menuOpen ? "menu-open" : ""}`}>
+
+        {/* Mobile Hamburger Toggle Button */}
+
+        <button
+          className="menu-toggle"
+          type="button"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle navigation menu"
+          aria-expanded={menuOpen}
+          aria-controls="main-navigation"
+        >
+          {menuOpen ? "✕" : "☰"}
+        </button>
+
+        {/* Pentawise Logo */}
+
         <div className="navbar-brand">
           <Link
             href="/"
             aria-label="Home"
-            onClick={() => setActiveSection("home")}
+            onClick={() => {
+              setActiveSection("home");
+              setMenuOpen(false);
+            }}
           >
             <Image
               src="/pentawise logo.png"
@@ -70,7 +90,13 @@ export default function Navbar() {
           </Link>
         </div>
 
-        <nav className="nav-links" aria-label="Main navigation">
+        {/* Navigation Links */}
+
+        <nav
+          id="main-navigation"
+          className="nav-links"
+          aria-label="Main navigation"
+        >
           {navLinks.map((link) => {
             const isActive = activeSection === link.section;
 
@@ -80,7 +106,10 @@ export default function Navbar() {
                 href={link.href}
                 className={`nav-link ${isActive ? "active" : ""}`}
                 aria-current={isActive ? "location" : undefined}
-                onClick={() => setActiveSection(link.section)}
+                onClick={() => {
+                  setActiveSection(link.section);
+                  setMenuOpen(false);
+                }}
               >
                 {link.label}
               </Link>
@@ -88,12 +117,15 @@ export default function Navbar() {
           })}
         </nav>
 
+        {/* Book a Free Expert Consultation Button */}
+
         <div className="navbar-action">
           <a
             href="https://wa.me/"
             className="consultation-button"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => setMenuOpen(false)}
           >
             <span className="consultation-icon">
               <Phone size={16} strokeWidth={2} />
@@ -105,8 +137,8 @@ export default function Navbar() {
             </span>
           </a>
         </div>
+
       </div>
     </header>
   );
 }
-
