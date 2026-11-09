@@ -857,13 +857,88 @@ html {
 
   .hero-stats {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px 16px;
+    justify-items: stretch;
+    align-items: start;
+    column-gap: 20px;
+    row-gap: 18px;
+    padding: 12px 10px;
+  }
+
+  .hero-stat {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+    padding-left: 12px;
+  }
+
+  .hero-stat::before {
+    left: 0;
+    top: 0;
   }
 
   .hero-stat h2 {
     font-size: 19px;
   }
+
+  
+
+  .site-top-background::before {
+    height: 680px;
+
+     background-image:
+      linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.80) 0%,
+        rgba(255, 255, 255, 0.80) 45%,
+        rgba(255, 255, 255, 0.99) 65%,
+        rgba(255, 255, 255, 0.99) 82%,
+        #ffffff 100%
+      ),
+      url("/navbar_background.png");
+
+    background-position:
+      center top,
+      center top;
+
+    background-size:
+      100% 100%,
+      auto 600px;
+
+    background-repeat: no-repeat;
+  }
 }
+
+/* ===== MOBILE TRUST SECTION ADJUSTMENTS ===== */
+
+@media (max-width: 600px) {
+
+  .hero-trust {
+    margin-top: -25px;
+    margin-bottom: 10px;
+    gap: 5px;
+  }
+
+  .student-avatars {
+    width: 58px;
+    height: 20px;
+  }
+
+  .student-trust-image {
+    width: 58px;
+    height: 24px;
+  }
+
+  .hero-trust p {
+    font-size: 10px;
+    margin: 5px;
+  }
+
+}
+
 
 /* ================================
    DESTINATION SHOWCASE
@@ -1114,47 +1189,89 @@ html {
    MOBILE
 ================================ */
 
+
+/* ===== MOBILE DESTINATION SHOWCASE ===== */
+
 @media (max-width: 480px) {
+
   .destination-showcase {
-    min-height: 320px;
-    padding: 20px 10px 12px;
+    min-height: auto;
+    padding: 20px 0 20px;
+    overflow: hidden;
   }
 
+  /* Heading remains above the images */
   .destination-showcase-heading {
-    margin-bottom: 16px;
+    position: relative;
+    top: 0;
+    margin: 0 auto 25px;
+    padding: 0 10px;
     font-size: 21px;
     line-height: 1.3;
+    text-align: center;
   }
 
+  /* Preserve all 9 original columns */
   .destination-columns {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 4px;
+    display: grid;
+    grid-template-columns: repeat(9, 70px);
+    align-items: stretch;
+    gap: 5px;
+
+    width: 100%;
+    max-width: none;
+    margin: 0;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0 10px 8px;
+    box-sizing: border-box;
   }
 
-  .destination-column-6,
-  .destination-column-7,
-  .destination-column-8,
-  .destination-column-9 {
-    display: none;
+  /* Keep all destination columns */
+  .destination-column {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
   }
 
+  /* Preserve staggered positions */
   .destination-column-1,
-  .destination-column-5 {
-    padding-top: 12px;
+  .destination-column-9 {
+    padding-top: 8px;
   }
 
   .destination-column-2,
-  .destination-column-4 {
-    padding-top: 30px;
+  .destination-column-8 {
+    padding-top: 40px;
   }
 
-  .destination-column-3 {
-    padding-top: 48px;
+  .destination-column-3,
+  .destination-column-5,
+  .destination-column-7 {
+    padding-top: 100px;
   }
 
-  .destination-placeholder {
-    min-height: 35px;
+  .destination-column-4,
+  .destination-column-6 {
+    padding-top: 135px;
   }
+
+  /* Preserve image proportions */
+  .destination-card {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 0.85;
+    border-radius: 6px;
+  }
+
+  .destination-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
 }
 
 /* ================================
@@ -1265,11 +1382,15 @@ html {
   .service-title {
     font-size: 18px;
     margin-bottom: 10px;
+    text-align: ;
+    justify-content: center;
+    align-items: center;
   }
 
   .service-description {
     font-size: 13px;
     line-height: 1.5;
+    text-align: center;
   }
 }
 
@@ -1448,6 +1569,60 @@ html {
     font-size: 24px;
   }
 }
+
+/* ===== MOBILE JOURNEY CARD FIX ===== */
+
+@media (max-width: 600px) {
+
+  .journey-card {
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  /* Keep the complete image visible */
+  .journey-image {
+    height: auto;
+    min-height: 0;
+    flex: none;
+    overflow: visible;
+  }
+
+  .journey-image img {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* Reduce content size */
+  .journey-content {
+    padding: 12px 15px;
+  }
+
+  .journey-content h2 {
+    font-size: 19px;
+    line-height: 1.3;
+  }
+
+  .journey-form {
+    gap: 14px;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .journey-form input {
+    font-size: 12px;
+  }
+
+  .journey-form button {
+    width: 90px;
+    height: 27px;
+    font-size: 10px;
+  }
+
+}
+
 
 /* Success Stories Section */
 .success-stories {
