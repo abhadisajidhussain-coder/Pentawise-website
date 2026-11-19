@@ -17,6 +17,7 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Existing active section functionality
   useEffect(() => {
     const updateActiveSection = () => {
       if (window.scrollY < 100) {
@@ -47,6 +48,28 @@ export default function Navbar() {
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener("scroll", updateActiveSection);
+    };
+  }, []);
+
+  // NEW: Navbar background blur on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const header = document.querySelector(".site-header");
+
+      if (header) {
+        header.classList.toggle("scrolled", window.scrollY > 20);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    // Check initial scroll position
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
