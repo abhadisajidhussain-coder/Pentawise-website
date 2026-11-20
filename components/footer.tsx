@@ -1,18 +1,16 @@
-
 import Image from "next/image";
 import Link from "next/link";
-import { Globe, MessageCircle, Send } from "lucide-react";
 
 const footerColumns = [
   {
     title: "Company",
     links: [
       { label: "Home", href: "/" },
-      { label: "Countries", href: "/countries" },
-      { label: "Services", href: "/services" },
+      { label: "Countries", href: "/#countries", section: "countries" },
+      { label: "Services", href: "/#services", section: "services" },
       { label: "Universities", href: "/universities" },
-      { label: "Contact Us", href: "/contact" },
-      { label: "Feedback", href: "/feedback" },
+      { label: "Contact Us", href: "/#contact", section: "contact" },
+      { label: "Feedback", href: "/#success-stories" },
     ],
   },
   {
@@ -69,26 +67,31 @@ export default function Footer() {
 
           <div className="footer-divider"></div>
 
-            <p className="footer-description">
+          <p className="footer-description">
             Pentawise is a trusted study abroad consultancy guiding students
             to top universities across 20+ countries. With personalized
             <br />
             counseling, scholarship guidance, and visa support, we make your
             global education journey smooth and stress-free.
-            </p>
+          </p>
 
-            <div className="footer-divider"></div>
+          <div className="footer-divider"></div>
         </div>
 
         <div className="footer-columns">
           {footerColumns.map((column, index) => (
             <div className="footer-column" key={`${column.title}-${index}`}>
               <h3>{column.title}</h3>
-
               <ul>
                 {column.links.map((link) => (
                   <li key={link.label}>
-                    <Link href={link.href}>{link.label}</Link>
+                    {column.title === "Countries" ? (
+                      <span className="footer-country-link">
+                        {link.label}
+                      </span>
+                    ) : (
+                      <Link href={link.href}>{link.label}</Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -99,36 +102,56 @@ export default function Footer() {
             <h3>Contact Us</h3>
 
             <a href="tel:+924687456416">+92 4687456416</a>
+
             <a href="mailto:info.pentawise@gmail.com">
               info.pentawise@gmail.com
             </a>
 
+            {/* Social Media Icons */}
             <div className="footer-socials">
+              {/* Instagram */}
               <a
                 href="https://www.instagram.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
               >
-                <Globe size={19} />
+                <Image
+                  src="/Insta_icon.png"
+                  alt="Instagram"
+                  width={19}
+                  height={19}
+                />
               </a>
 
+              {/* LinkedIn */}
               <a
                 href="https://www.linkedin.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
               >
-                <MessageCircle size={19} />
+                <Image
+                  src="/Linkedin_icon.png"
+                  alt="LinkedIn"
+                  width={19}
+                  height={19}
+                />
               </a>
 
+              {/* Facebook */}
               <a
                 href="https://www.facebook.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
               >
-                <Send size={19} />
+                <Image
+                  src="/Facebook_icon.png"
+                  alt="Facebook"
+                  width={19}
+                  height={19}
+                />
               </a>
             </div>
           </div>
@@ -136,7 +159,6 @@ export default function Footer() {
       </div>
 
       <div className="footer-bottom">
-       
         <Image
           src="/PoweredbyImage 2.png"
           alt="H2H8 Studio"

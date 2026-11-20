@@ -77,7 +77,9 @@ export default function HomePage() {
       </div>
 
       <UniversityPartners />
-      <Success_Stories />
+      <div id="success-stories">
+        <Success_Stories />
+      </div>
 
       <div id="contact">
         <SYJ />

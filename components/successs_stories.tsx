@@ -11,7 +11,7 @@ const stories = [
 
 export default function SuccessStories() {
   return (
-    <section className="success-stories">
+    <section id="success-stories" className="success-stories">
       <h2 className="success-stories-heading">
         Success Stories
       </h2>
